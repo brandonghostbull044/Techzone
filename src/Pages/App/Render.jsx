@@ -1,7 +1,6 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
 import { useContext } from "react";
 import { GlobalContext } from "../../Context";
-import { GlobalProvider } from '../../Context'
 import Home from '../Home'
 import MyAccount from '../MyAccount'
 import MyOrder from '../MyOrder'
@@ -9,6 +8,8 @@ import MyOrders from '../MyOrders'
 import NotFound from '../NotFound'
 import SingIn from '../SingIn'
 import Navbar from '../../Components/Navbar'
+import Bottom from '../../Components/Portals/ProductDetailContainer/Components/Bottom';
+import Top from '../../Components/Portals/ProductDetailContainer/Components/Top';
 import { ProductDetailContainer } from '../../Components/Portals/ProductDetailContainer'
 import './App.css'
 
@@ -25,30 +26,21 @@ const AppRoutes = () => {let routes = useRoutes([
 }
 
 function RenderUI() {
-  const {openDetail, setOpenDetail} = useContext(GlobalContext);
-
-  document.body.addEventListener('click', (e) => {
-    if (!(e.target.matches('.noTouchShow')) && openDetail) {
-      if (e.target.matches('.touchShow')) {
-        setOpenDetail(true);
-      } else {
-        setOpenDetail(false);
-      }
-    }
-  })
+  const {openDetail} = useContext(GlobalContext);
 
   return (
-    <GlobalProvider>
+    <>
       <BrowserRouter >
         <Navbar />
         <AppRoutes />  
       </BrowserRouter>
-    {openDetail && (
-        <ProductDetailContainer>
-            <p>HOLAAAA</p>
-        </ProductDetailContainer>
-    )}
-    </GlobalProvider>
+      {openDetail && (
+          <ProductDetailContainer>
+              <Top />
+              <Bottom />
+          </ProductDetailContainer>
+      )}
+    </>
   )
 }
 
