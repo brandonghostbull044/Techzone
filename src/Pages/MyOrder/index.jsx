@@ -1,10 +1,11 @@
 import Layout from '../../Components/Layout'
+import { OrderContainer } from '../../Components/OrderContainer'
 
 function MyOrder() {
 
   return (
-    <Layout className='bg-red-500'>
-      My Order
+    <Layout className='flex flex-col'>
+      <OrderContainer />
     </Layout>
   )
 }

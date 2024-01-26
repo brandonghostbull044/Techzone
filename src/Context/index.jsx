@@ -13,6 +13,7 @@ function GlobalProvider({children}) {
     const [openPrice, setOpenPrice] = useState('');
     const [openDescription, setOpenDescription] = useState('');
     const openCharacteristics = [openImage, openTitle, openCategory, openPrice, openDescription];
+    const [myItems, setMyItems] = useState([]);
 
 
     const openCartDetail = (props, e) => { 
@@ -29,7 +30,20 @@ function GlobalProvider({children}) {
         }
     }
 
-    const addToCart = () => {
+    const addToCart = (props) => {
+        var item = Object.assign({counter: 1}, props);
+        var finded = false;
+        var newMyItems = [...myItems];
+        for (var i = 0; i < myItems.length; i++) {
+            if (myItems[i].id === props.id) {
+                finded = true;
+                myItems[i].counter += 1;
+            }
+        }
+        if (!finded) {
+            newMyItems.push(item);
+            setMyItems(newMyItems);
+        }
         setCartCounter((cartCounter + 1));
     }
 
@@ -40,7 +54,7 @@ function GlobalProvider({children}) {
     }, [])
 
     return (
-        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, setOpenDetail, openCartDetail, openCharacteristics}}>
+        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, setOpenDetail, openCartDetail, openCharacteristics, myItems}}>
             {children}
         </GlobalContext.Provider>
     );
