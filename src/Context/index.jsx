@@ -14,6 +14,7 @@ function GlobalProvider({children}) {
     const [openDescription, setOpenDescription] = useState('');
     const openCharacteristics = [openImage, openTitle, openCategory, openPrice, openDescription];
     const [myItems, setMyItems] = useState([]);
+    const [currentCartTotal, setCurrentCartTotal] = useState(0);
 
 
     const openCartDetail = (props, e) => { 
@@ -45,6 +46,8 @@ function GlobalProvider({children}) {
             setMyItems(newMyItems);
         }
         setCartCounter((cartCounter + 1));
+        setCurrentCartTotal((currentCartTotal + props.price));
+        console.log(currentCartTotal);
     }
 
     useEffect(() => {
@@ -54,7 +57,7 @@ function GlobalProvider({children}) {
     }, [])
 
     return (
-        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, setOpenDetail, openCartDetail, openCharacteristics, myItems}}>
+        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, setOpenDetail, openCartDetail, openCharacteristics, myItems, currentCartTotal}}>
             {children}
         </GlobalContext.Provider>
     );
