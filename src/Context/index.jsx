@@ -71,7 +71,6 @@ function GlobalProvider({children}) {
         }
         setCartCounter((cartCounter + 1));
         setCurrentCartTotal((currentCartTotal + props.price));
-        console.log(currentCartTotal);
     }
 
     useEffect(() => {
