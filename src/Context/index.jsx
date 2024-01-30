@@ -18,6 +18,28 @@ function GlobalProvider({children}) {
     const [currentCartTotal, setCurrentCartTotal] = useState(0);
 
 
+    const adjustCount = (props, operator) => {
+        var item = myItems.filter((item) => item.id == props);
+        const index = myItems.findIndex(it => it.id === item[0].id);
+        if (operator == '+') {
+            myItems[index].counter = myItems[index].counter + 1;
+            setCartCounter(cartCounter + 1);
+        } else if (operator == '-') {
+            myItems[index].counter = myItems[index].counter - 1;
+            setCartCounter(cartCounter - 1);
+        }
+        if (item[0].counter <= 0) {
+            myItems.splice(index, 1);
+        }
+        let newItem = [...myItems];
+        var newTotal = 0;
+        setMyItems(newItem);
+        for (var i = 0; i < myItems.length; i++) {
+            newTotal = newTotal + (myItems[i].price * myItems[i].counter)
+        }
+        setCurrentCartTotal(newTotal);
+    }
+
     const openCartDetail = (props, e) => { 
         if (!(e.matches('.noActivate'))) {
             if(!openDetail) {
@@ -59,7 +81,7 @@ function GlobalProvider({children}) {
     }, [])
 
     return (
-        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, setOpenDetail, openCartDetail, openCharacteristics, myItems, currentCartTotal}}>
+        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, setOpenDetail, openCartDetail, openCharacteristics, myItems, currentCartTotal, adjustCount}}>
             {children}
         </GlobalContext.Provider>
     );
