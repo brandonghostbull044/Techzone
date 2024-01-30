@@ -12,7 +12,8 @@ function GlobalProvider({children}) {
     const [openCategory, setOpenCategory] = useState('');
     const [openPrice, setOpenPrice] = useState('');
     const [openDescription, setOpenDescription] = useState('');
-    const openCharacteristics = [openImage, openTitle, openCategory, openPrice, openDescription];
+    const [openId, setOpenId] = useState(0);
+    const openCharacteristics = {image: [openImage], title: openTitle, category: openCategory, price: openPrice, description: openDescription, id: openId};
     const [myItems, setMyItems] = useState([]);
     const [currentCartTotal, setCurrentCartTotal] = useState(0);
 
@@ -28,6 +29,7 @@ function GlobalProvider({children}) {
             setOpenCategory(props[2]);
             setOpenPrice(props[3]);
             setOpenDescription(props[4]);
+            setOpenId(props[5]);
         }
     }
 
