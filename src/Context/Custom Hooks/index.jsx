@@ -26,10 +26,9 @@ function useLocalStorage(initialValue) {
       }
     }, []);
     const saveinfo = (newinfo) => {
-      localStorage.setinfo("USERSV1", JSON.stringify(newinfo));
+      localStorage.setItem("USERSV1", JSON.stringify(newinfo));
       setinfo(newinfo);
     };
-    console.log(info);
 
     return {info, saveinfo, loading, error};
   }

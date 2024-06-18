@@ -1,10 +1,14 @@
 import Layout from '../../Components/Layout'
 import { OrdersContainer } from '../../Components/OrdersContainer'
+import { Helmet } from 'react-helmet'
 
 function MyOrders() {
 
   return (
-    <Layout className='bg-red-500'>
+    <Layout>
+      <Helmet>
+        <title>My Orders - Techzone</title>
+      </Helmet>
       <OrdersContainer />
     </Layout>
   )

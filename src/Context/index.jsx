@@ -25,6 +25,7 @@ function GlobalProvider({children}) {
     const [searchValue, setSearchValue] = useState('');
     const [openSearchImput, setOpenSearchImput] = useState(false);
     const [singed, setSinged] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
 
 
 
@@ -44,9 +45,13 @@ function GlobalProvider({children}) {
     }
 
     const addOrder = (items) => {
+        var newUser  = {...currentUser, orders: []};
         const tiempoTranscurrido = Date.now();
         const hoy = new Date(tiempoTranscurrido);
-        setMyOrders([...myOrders, [items, currentCartTotal, cartCounter, myOrders.length, hoy.toUTCString().slice(0, -3)]]);
+        const newOrder = [items, currentCartTotal, cartCounter, myOrders.length, hoy.toUTCString().slice(0, -3)];
+        setMyOrders([...myOrders, newOrder]);
+        newUser.orders.push(newOrder);
+        setCurrentUser(newUser);
         setMyItems([]);
         setCurrentCartTotal(0);
         setCartCounter(0);
@@ -148,7 +153,7 @@ function GlobalProvider({children}) {
     }, [])
 
     return (
-        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, toggleDetail, openCartDetail, openCharacteristics, myItems, currentCartTotal, adjustCount, openDetailCheckout, toggleDetailCheckout, deleteMyItem, myOrders, addOrder, expandOrder, setExpandOrder, actualSlide, setActualSlide, searchValue, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, singed, setSinged, users, saveInfo, loading, error}}>
+        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, toggleDetail, openCartDetail, openCharacteristics, myItems, currentCartTotal, adjustCount, openDetailCheckout, toggleDetailCheckout, deleteMyItem, myOrders, addOrder, expandOrder, setExpandOrder, actualSlide, setActualSlide, searchValue, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, singed, setSinged, users, saveInfo, loading, error, currentUser, setCurrentUser}}>
             {children}
         </GlobalContext.Provider>
     );

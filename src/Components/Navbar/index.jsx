@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import { GlobalContext } from "../../Context"
 
 function Navbar () {
-    const { cartCounter, setExpandOrder, actualSlide, setActualSlide, toggleDetail, toggleDetailCheckout, myOrders, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, singed, setSinged } = useContext(GlobalContext);
+    const { cartCounter, setExpandOrder, actualSlide, setActualSlide, toggleDetail, toggleDetailCheckout, myOrders, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, singed, setSinged, currentUser } = useContext(GlobalContext);
     const activeStyle = 'underline underline-offset-4';
     
     return (
@@ -57,8 +57,8 @@ function Navbar () {
             </ul>
 
             <ul className="flex items-center gap-3.5">
-                <li className='text-black/60 text-lg'>
-                    techzone@tech.com
+                <li className={singed ? "text-black/60 text-lg" : "hidden"}>
+                    {currentUser.email}
                 </li>
                 <li className={singed ? "text-xl" : "hidden"}>
                     <NavLink to='/my-orders' className={({ isActive }) => isActive ? activeStyle : 'undefined'} onClick={() => {setExpandOrder(-1); setActualSlide('**')}}>

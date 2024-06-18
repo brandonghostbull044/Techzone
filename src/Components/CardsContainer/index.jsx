@@ -1,12 +1,13 @@
 import React from "react";
 import { Card } from "../Card";
-import { GlobalContext } from '../../Context'
+import { GlobalContext } from '../../Context';
+import { NavLink } from "react-router-dom";
 
 function CardsContainer() {
-    const { items, actualSlide, searchValue, globalCLick } = React.useContext(GlobalContext);
+    const { items, actualSlide, searchValue, globalCLick, singed } = React.useContext(GlobalContext);
     return (
-        <div className="grid gap-4 grid-cols-4 w-full p-20 justify-items-center" onClick={(e) => {globalCLick(e)}}>
-            {(() => {
+        <div className={singed ? "grid gap-4 grid-cols-4 w-full p-20 justify-items-center" : "flex items-center justify-center"} onClick={(e) => {globalCLick(e)}}>
+            {singed ? (() => {
                 if (actualSlide === '') {
                     return (
                         items && items.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())).map(item => (
@@ -26,7 +27,7 @@ function CardsContainer() {
                         ))
                     );
                 }
-            })()}
+            }) : (<NavLink to="sing-in" className="flex self-center text-center rounded-full bg-teal-400 p-4 text-white font-bold hover:scale-[1.02]">Sing In, Please.</NavLink>)}
         </div>
     );
 }
