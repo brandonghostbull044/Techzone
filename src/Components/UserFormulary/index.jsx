@@ -1,8 +1,10 @@
 import { useContext } from "react"
 import { GlobalContext } from "../../Context"; 
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
 
 function UserFormulary (props) {
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   const { setSinged, users, setCurrentUser, saveInfo } = useContext(GlobalContext);
   const navigate = useNavigate();
   const email = document.getElementById('emailField');
@@ -42,7 +44,12 @@ function UserFormulary (props) {
           <input id="emailField" type='text' className='border border-slate-300 rounded-full p-2' placeholder="Email"></input>
           <input id="passwordField" type='password' className='border border-slate-300 rounded-full p-2' placeholder="Password"></input>
 
-          <div className="flex justify-center p-2 hover:scale-[1.01] hover:bg-teal-500 bg-teal-400  rounded-full cursor-pointer text-white font-bold text-xl" onClick={() => {singIn("/")}}>{props.buttonTittle}</div>
+          <div className="flex justify-center p-2 hover:scale-[1.01] hover:bg-teal-500 bg-teal-400  rounded-full cursor-pointer text-white font-bold text-xl" onClick={() => loginWithRedirect()}>{props.buttonTittle}</div>
+          {isAuthenticated && <div>
+            <h2>Welcome, {user.name}</h2>
+            <img src={user.picture} alt={user.name} />
+            <p>Email: {user.email}</p>
+          </div>}
       </div>
     </>
   )
