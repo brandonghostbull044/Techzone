@@ -1,0 +1,6 @@
+use("Techzone")
+
+db.data.insertOne({
+    last_name: 'Leon',
+    email: ''
+})

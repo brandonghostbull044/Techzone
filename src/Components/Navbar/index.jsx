@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import { GlobalContext } from "../../Context"
 
 function Navbar () {
-    const { cartCounter, setExpandOrder, actualSlide, setActualSlide, toggleDetail, toggleDetailCheckout, myOrders, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, singed, setSinged, currentUser } = useContext(GlobalContext);
+    const { cartCounter, setExpandOrder, actualSlide, setActualSlide, myOrders, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, currentUser } = useContext(GlobalContext);
     const activeStyle = 'underline underline-offset-4';
     
     return (
@@ -57,27 +57,17 @@ function Navbar () {
             </ul>
 
             <ul className="flex items-center gap-3.5">
-                <li className={singed ? "text-black/60 text-lg" : "hidden"}>
-                    {currentUser.email}
+                <li className={currentUser ? "text-black/60 text-lg" : "hidden"}>
+                    {currentUser && currentUser.email}
                 </li>
-                <li className={singed ? "text-xl" : "hidden"}>
-                    <NavLink to='/my-orders' className={({ isActive }) => isActive ? activeStyle : 'undefined'} onClick={() => {setExpandOrder(-1); setActualSlide('**')}}>
-                        My Orders {myOrders.length}
-                    </NavLink>
-                </li>
-                <li className={singed ? "text-xl" : "hidden"}>
+                <li className={currentUser ? "text-xl" : "hidden"}>
                     <NavLink to='/my-account' className={({ isActive }) => isActive ? activeStyle : 'undefined'} onClick={() => {setExpandOrder(-1); setActualSlide('**')}}>
                         My Account
                     </NavLink>
                 </li>
-                <li className={!singed ? "text-xl" : "hidden"}>
+                <li className={!currentUser ? "text-xl" : "hidden"}>
                     <NavLink to='/sing-in' className={({ isActive }) => isActive ? activeStyle : 'undefined'} onClick={() => {setExpandOrder(-1); setActualSlide('**')}}>
                         Sing In
-                    </NavLink>
-                </li>
-                <li className={!singed ? "text-xl" : "hidden"}>
-                    <NavLink to='/sing-up' className={({ isActive }) => isActive ? activeStyle : 'undefined'} onClick={() => {setExpandOrder(-1); setActualSlide('**')}}>
-                        Sing Up
                     </NavLink>
                 </li>
                 <li className="text-xl">

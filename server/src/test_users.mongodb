@@ -1,0 +1,25 @@
+use("Techzone")
+
+db.users.insertMany([
+    {
+        first_name: "Juan",
+        last_name: "Pérez",
+        email: "juan.perez@example.com",
+        password: "contrasena1",
+        orders: []
+    },
+    {
+        first_name: "Ana",
+        last_name: "González",
+        email: "ana.gonzalez@example.com",
+        password: "contrasena2",
+        orders: []
+    },
+    {
+        first_name: "Luis",
+        last_name: "Martínez",
+        email: "luis.martinez@example.com",
+        password: "contrasena3",
+        orders: []
+    }
+]);

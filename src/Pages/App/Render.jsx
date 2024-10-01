@@ -10,7 +10,6 @@ import SingIn from '../SingIn';
 import Navbar from '../../Components/Navbar';
 import Bottom from '../../Components/Portals/ProductDetailContainer/Components/Bottom';
 import Top from '../../Components/Portals/ProductDetailContainer/Components/Top';
-import SingUp from '../SingUp';
 import { ProductDetailContainer } from '../../Components/Portals/ProductDetailContainer';
 import { CheckoutSideMenu } from "../../Components/Portals/CheckoutSideMenu";
 import { OrderContainerDetail } from "../../Components/OrderContainerDetail";
@@ -22,8 +21,7 @@ const AppRoutes = () => {let routes = useRoutes([
     {path: '/my-order', element: <MyOrder />},
     {path: '/my-orders', element: <MyOrders />},
     {path: '/sing-in', element: <SingIn />},
-    {path: '/*', element: <NotFound />},
-    {path: '/sing-up', element: <SingUp />}
+    {path: '/*', element: <NotFound />}
   ])
   
   return routes

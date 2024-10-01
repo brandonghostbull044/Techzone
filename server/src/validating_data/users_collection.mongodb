@@ -1,0 +1,41 @@
+use("Techzone")
+
+db.createCollection("users", {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['first_name', 'last_name', 'password', 'role', 'age'],
+            //additionalProperties ayda a quitar el dinamismo propio de mongo, lo que evita que se agreguen campos que no estan declarados en la creacion de la coleccion
+            additionalProperties: false,
+            properties: {
+                first_name: {
+                    bsonType: 'string'
+                },
+                last_name: {
+                    bsonType: 'string'
+                },
+                email: {
+                    bsonType: 'string'
+                },
+                password: {
+                    bsonType: 'string',
+                    pattern: "^[A-Za-z0-9]{8,}$"
+                },
+                age: {
+                    bsonType: 'number',
+                    minimum: 18,
+                    maximum: 65
+                },
+                is_single: {
+                    bsonType: 'bool'
+                },
+                role: {
+                    enum: ['emplyee', 'admin']
+                }
+            }
+        }
+    }
+})
+
+//Este metodo devuelve la info de todas las colecciones que existen en la DB
+db.getCollectionInfos()

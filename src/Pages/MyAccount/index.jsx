@@ -1,5 +1,6 @@
 import Layout from '../../Components/Layout'
 import { Helmet } from 'react-helmet'
+import { UserInfoShower } from "../../Components/UserInfoShower"
 
 function MyAccount() {
 
@@ -8,7 +9,7 @@ function MyAccount() {
       <Helmet>
         <title>Account - Techzone</title>
       </Helmet>
-      My Account
+      <UserInfoShower />
     </Layout>
   )
 }

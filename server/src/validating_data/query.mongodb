@@ -1,0 +1,3 @@
+use("Techzone")
+
+db.users.find()

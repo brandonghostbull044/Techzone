@@ -1,0 +1,39 @@
+use("Techzone")
+
+db.runCommand({
+    //Cuando se edita el modelo de datos de una coleccion se debe enviar todo el modelo de datos
+    collMod: 'users',
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['first_name', 'last_name', 'password', 'role', 'age'],
+            additionalProperties: false,
+            properties: {
+                first_name: {
+                    bsonType: 'string'
+                },
+                last_name: {
+                    bsonType: 'string'
+                },
+                email: {
+                    bsonType: 'string'
+                },
+                password: {
+                    bsonType: 'string',
+                    pattern: "^[A-Za-z0-9]{8,}$"
+                },
+                age: {
+                    bsonType: 'number',
+                    minimum: 18,
+                    maximum: 65
+                },
+                is_single: {
+                    bsonType: 'bool'
+                },
+                role: {
+                    enum: ['emplyee', 'admin']
+                }
+            }
+        }
+    }
+})
