@@ -1,3 +1,0 @@
-use("Techzone")
-
-db.data.find().count()
