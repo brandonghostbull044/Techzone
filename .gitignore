@@ -103,56 +103,49 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux
 
 
-mongo_data/
 
+# Ignorar archivos de entorno (configuración sensible)
+server/.env
+server/.env.local
+server/.env.*.local
 
-# Ignorar archivos de configuración de entorno (como credenciales, claves, etc.)
-.env
-.env.local
-.env.*.local
+# Ignorar directorio local donde se almacenan los datos de MongoDB
+server/data_base/
+server/data_base/.mongodb/
+server/data_base/diagnostic.data/
+server/data_base/journal/
 
-# Ignorar el directorio local donde se almacenan los datos de MongoDB (ajusta la ruta si es diferente)
-data_base/
-data/
+# Ignorar dependencias PHP (Composer)
+server/vendor/
+server/composer.lock
 
-# Ignorar volúmenes y otros artefactos generados por Docker
-docker-compose.override.yml
-docker-compose.override.yaml
-docker-compose.prod.yml
-docker-compose.prod.yaml
-docker-compose.dev.yml
-docker-compose.dev.yaml
+# Ignorar archivos temporales o de caché
+server/src/crud/*.log
+server/tmp/
+server/cache/
 
-# Ignorar los directorios creados por Docker para almacenar volúmenes si se montan en el sistema local
-volumes/
-docker-data/
-logs/
+# Ignorar artefactos de logs y cobertura
+server/*.log
+server/coverage/
+server/.cache/
+server/.tmp/
 
-# Ignorar artefactos de dependencias (ajustar según tu lenguaje o tecnología)
-node_modules/
-vendor/       # PHP Composer (si usas PHP)
-composer.lock # Archivo de Composer (si no deseas compartirlo)
+# Ignorar archivos de configuración del IDE (VS Code, PHPStorm, etc.)
+server/.vscode/
+server/.idea/
 
-# Ignorar archivos de construcción y paquetes (si aplican)
-dist/
-build/
-.DS_Store     # macOS
-Thumbs.db     # Windows
+# Ignorar archivos de sistema
+*.DS_Store # macOS
+Thumbs.db # Windows
 
-# Ignorar archivos de bases de datos SQLite (si los usas)
-*.sqlite3
-*.db
+# Ignorar archivos de Docker si no quieres compartir configuraciones locales
+server/docker-compose.override.yml
+server/docker-compose.prod.yml
+server/docker-compose.dev.yml
 
-# Ignorar archivos generados por el IDE (por ejemplo, Visual Studio Code, JetBrains, etc.)
-.vscode/
-.idea/
+# Ignorar configuraciones y volúmenes de Docker locales
+server/volumes/
+server/logs/
 
-# Ignorar archivos de log
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Ignorar artefactos de cobertura de tests
-coverage/
-*.
+# Ignorar configuraciones de pruebas
+server/src/test/
