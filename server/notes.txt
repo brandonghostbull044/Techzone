@@ -1,0 +1,1 @@
+crear db docker compose up -d mongodb

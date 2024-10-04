@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.5",
     "@faker-js/faker": "^8.4.1",
     "@mui/material": "^5.15.20",
+    "axios": "^1.7.7",
     "express": "^4.19.2",
     "nodemon": "^3.1.4",
     "random": "^4.1.0",

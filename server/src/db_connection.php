@@ -10,7 +10,7 @@ class DBConnection {
     public function __construct()
     {
         try {
-            $this->client = new MongoDB\Client('moongodb://localhost:27017');
+            $this->client = new MongoDB\Client('mongodb://root:root123@localhost:27018');
             $this->data_base = $this->client->selectDatabase('Techzone');
         } catch (MongoDB\Driver\Exception\Exception $e) {
             echo "Error connecting to MongoDB: ", $e->getMessage(), "\n";

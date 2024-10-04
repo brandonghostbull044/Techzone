@@ -9,7 +9,7 @@ function SingIn() {
       <Helmet>
         <title>Sing In - Techzone</title>
       </Helmet>
-      <UserFormulary tittle="Sing In" buttonTittle="Sing In" route="/" operation="SI"/>
+      <UserFormulary route="/"/>
     </Layout>
   )
 }

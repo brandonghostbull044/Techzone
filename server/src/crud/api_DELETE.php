@@ -1,44 +1,34 @@
 <?php
 
 
-if ( $_SERVER['REQUEST_METHOD'] != 'DELETE' ) {
-    die('Solo se permite el método DELETE.');
-} else {
-    require __DIR__ . '/../src/basic_auth.php';
+use MongoDB\BSON\ObjectId;
+require __DIR__ . '/../db_connection.php';
 
-    require __DIR__ . '/../src/db_connection.php';
+$mongo = new DBConnection();
+$database = $mongo->getDatabase();
 
+$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$matches = explode('/', trim($path, '/'));
+var_dump($matches);
 
-    $allowed_resources = ['usuarios'];
+if (isset($matches[0])) {
+    switch ($matches[0]) {
+        case 'users':
+            $collection = $database->selectCollection('users');
+            $filter = ['_id' => new ObjectId($matches[1])];
+            $collection->deleteOne($filter);
+            break;
 
-    $matches = [];
-    preg_match('/\/([^\/]+)?\/?([^\/]+)?/', $_SERVER["REQUEST_URI"], $matches);
+        case 'productos':
+            break;
 
-    if ($matches[1] == '') {
-        require __DIR__ . '/../docs/four_serves.doc.php';
-    } else {
-        if ( !in_array($matches[1], $allowed_resources) ) {
-            http_response_code(404);
-            die("No se ha encontrado el recurso que buscas.");
-        } elseif ( empty($matches[2]) ) {
-            http_response_code(404);
-            die("Debes especificar el id del user");
-        } elseif ( !in_array($matches[2], $all_users_id) ) {
-            http_response_code(404);
-            die("El id de usuario no existe");
-        }
-        
-        
-        header('Content-Type: application/json');
-        
-        
-        $query = "CALL EliminarUsuario($matches[2])";
-        $stml = $pdo->prepare($query);
-        $stml->execute();
-        
-        echo "\n\nUsuario eliminado de manera exitosa\n";
+        default:
+            header("HTTP/1.1 404 Not Found");
+            echo "Página no encontrada";
+            break;
     }
+} else {
+    header("HTTP/1.1 400 Bad Request");
+    echo "Recurso no especificado";
 }
-
-
 ?>

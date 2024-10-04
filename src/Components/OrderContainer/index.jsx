@@ -2,16 +2,15 @@ import React from "react";
 import { MyOrderCard } from "../MyOrderCard"; 
 import { GlobalContext } from "../../Context";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 
 function OrderContainer() {
-    const { isAuthenticated } = useAuth0();
-    const { myItems, currentCartTotal, addOrder } = React.useContext(GlobalContext);
+    const { myItems, currentCartTotal, addOrder, singed } = React.useContext(GlobalContext);
     const navigate = useNavigate();
 
     const payOrder = () => {
-        if (isAuthenticated) {
+        if (singed) {
             addOrder(myItems);
+            navigate('/my-orders');
         } else {
             console.log("You are not authenticated");
             navigate('/sing-in');
@@ -29,9 +28,11 @@ function OrderContainer() {
                     :
                     
                     <>
-                        {myItems && myItems.map(item =>
-                            <MyOrderCard key={item.id} id={item.id} category={item.category.name} title={item.title} price={item.price} image={item.image} count={item.counter}/>
-                        )}
+                        <div className="h-4/6 overflow-auto">
+                            {myItems && myItems.map(item =>
+                                <MyOrderCard key={item.id} id={item.id} category={item.category.name} title={item.title} price={item.price} image={item.image} count={item.counter}/>
+                            )}
+                        </div>
                         
                         <div className="noTouch absolute bottom-6 left-1/3 flex flex-row bg-black bg-opacity-10 rounded-xl w-1/5 h-28 mt-10 font-bold text-3xl justify-center items-center"><p className="w-fit">Total: ${currentCartTotal}</p></div>
                         {currentCartTotal > 0 && (

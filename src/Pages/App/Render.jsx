@@ -13,6 +13,7 @@ import Top from '../../Components/Portals/ProductDetailContainer/Components/Top'
 import { ProductDetailContainer } from '../../Components/Portals/ProductDetailContainer';
 import { CheckoutSideMenu } from "../../Components/Portals/CheckoutSideMenu";
 import { OrderContainerDetail } from "../../Components/OrderContainerDetail";
+import { AccountSettings } from "../AccountSettings";
 import './App.css';
 
 const AppRoutes = () => {let routes = useRoutes([
@@ -21,7 +22,8 @@ const AppRoutes = () => {let routes = useRoutes([
     {path: '/my-order', element: <MyOrder />},
     {path: '/my-orders', element: <MyOrders />},
     {path: '/sing-in', element: <SingIn />},
-    {path: '/*', element: <NotFound />}
+    {path: '/*', element: <NotFound />},
+    {path: '/account-settings', element: <AccountSettings />}
   ])
   
   return routes

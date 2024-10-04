@@ -1,11 +1,13 @@
 import { useState, useEffect, createContext } from "react";
-import { useLocalStorage, useUser } from "./Custom Hooks";
+import { useLocalStorage } from "./Custom Hooks";
+import axios from 'axios';
 
 const GlobalContext = createContext();
 
 
 function GlobalProvider({children}) {
     const {info: users, saveInfo: saveInfo, loading, error} = useLocalStorage([{email: "Brandon", password: "12345"}]);
+    const [currentUser, setCurrentUser] = useState({});
     const [items, setItems] = useState(null);
     const [cartCounter, setCartCounter] = useState(0);
     const [openDetail, setOpenDetail] = useState(false);
@@ -19,13 +21,34 @@ function GlobalProvider({children}) {
     const [myItems, setMyItems] = useState([]);
     const [currentCartTotal, setCurrentCartTotal] = useState(0);
     const [openDetailCheckout, setOpenDetailCheckout] = useState(false);
-    const [myOrders, setMyOrders] = useState([]);
+    const [myOrders, setMyOrders] = useState(currentCartTotal.orders ? currentUser.orders : []);
     const [expandOrder, setExpandOrder] = useState(-1);
     const [actualSlide, setActualSlide] = useState('');
     const [searchValue, setSearchValue] = useState('');
     const [openSearchImput, setOpenSearchImput] = useState(false);
     const [singed, setSinged] = useState(false);
-    const {currentUser, loginWithRedirect, logout} = useUser(myOrders);
+
+
+
+
+
+    const logout = () => {
+        setMyOrders([]);
+        setMyItems([]);
+        setCurrentCartTotal(0);
+        setCartCounter(0);
+        setMyItems([]);
+        setCurrentUser(null);
+        setSinged(false);   
+    }
+
+
+
+    const login = (user) => {
+        setCurrentUser(user);
+        setSinged(true);
+        setMyOrders(user.orders? user.orders : []);
+    }
 
 
 
@@ -45,15 +68,28 @@ function GlobalProvider({children}) {
     }
 
     const addOrder = (items) => {
+        var newUser  = {...currentUser, orders: [...myOrders]};
         const tiempoTranscurrido = Date.now();
         const hoy = new Date(tiempoTranscurrido);
         const newOrder = [items, currentCartTotal, cartCounter, myOrders.length, hoy.toUTCString().slice(0, -3)];
+        newUser.orders.push(newOrder);
+        setCurrentUser(newUser);
         setMyOrders([...myOrders, newOrder]);
         setMyItems([]);
         setCurrentCartTotal(0);
         setCartCounter(0);
         setExpandOrder(myOrders.length);
         setActualSlide('**');
+
+        let data = {"_id": currentUser._id, "orders": newUser.orders};
+        const url = 'http://localhost:8000/users';
+        axios.put(url, data)
+        .then((response) => {
+            console.log(response);
+        })  
+        .catch((error) => {
+            console.log(error);
+        });
     }
 
     const deleteMyItem = (id) => {
@@ -150,7 +186,7 @@ function GlobalProvider({children}) {
     }, [])
 
     return (
-        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, toggleDetail, openCartDetail, openCharacteristics, myItems, currentCartTotal, adjustCount, openDetailCheckout, toggleDetailCheckout, deleteMyItem, myOrders, addOrder, expandOrder, setExpandOrder, actualSlide, setActualSlide, searchValue, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, singed, setSinged, users, saveInfo, loading, error, currentUser, loginWithRedirect, logout}}>
+        <GlobalContext.Provider value={{items, setItems, cartCounter, setCartCounter, addToCart, openDetail, toggleDetail, openCartDetail, openCharacteristics, myItems, currentCartTotal, adjustCount, openDetailCheckout, toggleDetailCheckout, deleteMyItem, myOrders, addOrder, expandOrder, setExpandOrder, actualSlide, setActualSlide, searchValue, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, singed, setSinged, users, saveInfo, loading, error, currentUser, setCurrentUser, logout, login}}>
             {children}
         </GlobalContext.Provider>
     );

@@ -104,3 +104,55 @@ $RECYCLE.BIN/
 
 
 mongo_data/
+
+
+# Ignorar archivos de configuración de entorno (como credenciales, claves, etc.)
+.env
+.env.local
+.env.*.local
+
+# Ignorar el directorio local donde se almacenan los datos de MongoDB (ajusta la ruta si es diferente)
+data_base/
+data/
+
+# Ignorar volúmenes y otros artefactos generados por Docker
+docker-compose.override.yml
+docker-compose.override.yaml
+docker-compose.prod.yml
+docker-compose.prod.yaml
+docker-compose.dev.yml
+docker-compose.dev.yaml
+
+# Ignorar los directorios creados por Docker para almacenar volúmenes si se montan en el sistema local
+volumes/
+docker-data/
+logs/
+
+# Ignorar artefactos de dependencias (ajustar según tu lenguaje o tecnología)
+node_modules/
+vendor/       # PHP Composer (si usas PHP)
+composer.lock # Archivo de Composer (si no deseas compartirlo)
+
+# Ignorar archivos de construcción y paquetes (si aplican)
+dist/
+build/
+.DS_Store     # macOS
+Thumbs.db     # Windows
+
+# Ignorar archivos de bases de datos SQLite (si los usas)
+*.sqlite3
+*.db
+
+# Ignorar archivos generados por el IDE (por ejemplo, Visual Studio Code, JetBrains, etc.)
+.vscode/
+.idea/
+
+# Ignorar archivos de log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar artefactos de cobertura de tests
+coverage/
+*.

@@ -3,12 +3,12 @@ import { NavLink } from "react-router-dom"
 import { GlobalContext } from "../../Context"
 
 function Navbar () {
-    const { cartCounter, setExpandOrder, actualSlide, setActualSlide, myOrders, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, currentUser } = useContext(GlobalContext);
+    const { cartCounter, setExpandOrder, actualSlide, setActualSlide, myOrders, setSearchValue, openSearchImput, setOpenSearchImput, globalCLick, currentUser, singed } = useContext(GlobalContext);
     const activeStyle = 'underline underline-offset-4';
     
     return (
         <nav className="flex justify-between items-center fixed w-full py-5 px-8 text-sm font-light top-0 bg-teal-400 z-50 h-12" onClick={(e) => {globalCLick(e)}}>
-            <ul className="flex items-center gap-3">
+            <ul className="flex items-center gap-3 w-[45%] justify-start">
                 <li className="font-semibold text-3xl">
                     <NavLink to='/' onClick={() => {setExpandOrder(-1), setActualSlide('')}}>
                         Techzone
@@ -46,7 +46,7 @@ function Navbar () {
                 </li>
             </ul>
 
-            <ul className="flex items-center gap-3">
+            <ul className="flex items-center gap-3 w-[10%] justify-center">
                 <li className="cursor-pointer">
                     {(!openSearchImput && actualSlide != '**') && 
                     <img src="https://cdn-icons-png.freepik.com/256/751/751463.png?ga=GA1.1.750385718.1708456577&" className="w-8 h-8" onClick={() =>  setOpenSearchImput(true)}></img>
@@ -56,16 +56,16 @@ function Navbar () {
                 <li></li>
             </ul>
 
-            <ul className="flex items-center gap-3.5">
+            <ul className="flex items-center gap-3.5 w-[45%] justify-end">
                 <li className={currentUser ? "text-black/60 text-lg" : "hidden"}>
                     {currentUser && currentUser.email}
                 </li>
-                <li className={currentUser ? "text-xl" : "hidden"}>
+                <li className={singed ? "text-xl" : "hidden"}>
                     <NavLink to='/my-account' className={({ isActive }) => isActive ? activeStyle : 'undefined'} onClick={() => {setExpandOrder(-1); setActualSlide('**')}}>
                         My Account
                     </NavLink>
                 </li>
-                <li className={!currentUser ? "text-xl" : "hidden"}>
+                <li className={!singed ? "text-xl" : "hidden"}>
                     <NavLink to='/sing-in' className={({ isActive }) => isActive ? activeStyle : 'undefined'} onClick={() => {setExpandOrder(-1); setActualSlide('**')}}>
                         Sing In
                     </NavLink>
