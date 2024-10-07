@@ -59,6 +59,7 @@ function UserFormulary (props) {
               })
               .then(response => {
                   let user = response.data;
+                  console.log(user);
                   user._id = user._id.$oid;
                   login(user);
                   navigate(props.route);

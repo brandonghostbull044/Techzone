@@ -80,7 +80,7 @@ function Settings(props) {
             <span className='border px-2'>{setting.content}</span>
           )}
           <button
-            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition-colors"
+            className="bg-teal-400 text-white p-2 rounded hover:bg-teal-600 transition-colors"
             onClick={() =>
               editableIndex === index
                 ? handleConfirmClick(index)

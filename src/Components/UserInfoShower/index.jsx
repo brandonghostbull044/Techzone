@@ -55,7 +55,7 @@ function UserInfoShower () {
                 </table>
             </div>
 
-            <div className="mt-12 w-full flex justify-end p-4">
+            <div className="w-full flex justify-end pb-4 pr-4">
                 <NavLink to="/account-settings">
                     <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" viewBox="0 0 16 16" className="cursor-pointer hover:scale-[1.01] transform transition-transform duration-600 hover:rotate-90">
                         <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
