@@ -9,7 +9,6 @@ $database = $mongo->getDatabase();
 
 $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $matches = explode('/', trim($path, '/'));
-var_dump($matches);
 
 if (isset($matches[0])) {
     switch ($matches[0]) {

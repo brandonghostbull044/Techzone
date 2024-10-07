@@ -22,7 +22,6 @@ $matches = explode('/', trim($path, '/'));
 if (isset($matches[0])) {
     switch ($matches[0]) {
         case 'users':
-            $db_user = 
             $user = $input;
             $filter = ['_id' => new ObjectId($user["_id"])];
             $updateArray = [];
@@ -40,7 +39,7 @@ if (isset($matches[0])) {
             $collection = $database->selectCollection('users');
             $result = $collection->updateOne($filter, $update);
             
-            echo 'Usuario agregado de manera exitosa';    
+            echo 'Usuario actualizado de manera exitosa';    
             break;
 
         case 'productos':
